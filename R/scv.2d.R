@@ -31,14 +31,17 @@
 #'
 #' @examples
 #' \dontrun{
+#' Load the test data set.
+#' data("us16")
+#'
 #' No decomposition, just SCV of total income.
-#' result <- scv.2d(data, "hitotal", weights = "hpopwgt")
+#' result <- scv.2d(us16, "hitotal", weights = "hpopwgt")
 #'
 #' Decomposition of income inequality by gender.
-#' result <- scv.2d(data, "hitotal", "sex", "hitotal", "hpopwgt")
+#' result <- scv.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
 #'
 #' Decomposition of income inequality by gender and income source.
-#' result <- scv.2d(data, "hitotal", "sex", c("hilabour", "hicapital",
+#' result <- scv.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 #' "hitransfer"), "hpopwgt")
 #' }
 scv.2d <- function(data, total, feature = NULL, sources = NULL,

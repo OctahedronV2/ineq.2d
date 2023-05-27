@@ -37,14 +37,17 @@ Function performing two-dimensional decomposition of the Theil index.
 }
 \examples{
 \dontrun{
+Load the test data set.
+data("us16")
+
 No decomposition, just Theil index of total income.
-result <- theil.2d(data, "hitotal", weights = "hpopwgt")
+result <- theil.2d(us16, "hitotal", weights = "hpopwgt")
 
 Decomposition of income inequality by gender.
-result <- theil.2d(data, "hitotal", "sex", "hitotal", "hpopwgt")
+result <- theil.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
 
 Decomposition of income inequality by gender and income source.
-result <- theil.2d(data, "hitotal", "sex", c("hilabour", "hicapital",
+result <- theil.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 "hitransfer"), "hpopwgt")
 }
 }
