@@ -152,7 +152,7 @@ theil.2d <- function(data, total, feature = NULL, sources = NULL,
   # If no feature is specified, the function will create two columns: all.W and
   # all.B, making sure that the loop still functions in this case. The all.B
   # column, however, will contain zeroes in this situation, so it can be deleted.
-  if (length(unique(data[, feature]))){
+  if (length(unique(data[, feature])) == 1){
     out <- out[, -3]
   }
 
