@@ -150,7 +150,10 @@ scv.2d(us16, "hitotal", "cohort", c("hilabour", "hicapital",
 ```
 
 References:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 16af2c2ab8dcd205fe92340b8cf4cc93dd86d3c7
 Garcia-Penalosa, C., & Orgiazzi, E. (2013). Factor Components of Inequality:
 A Cross-Country Study. Review of Income and Wealth, 59(4), 689-727.
 
