@@ -37,7 +37,6 @@ every inequality component in overall inequality. Set to FALSE by default.}
 }
 \value{
 Data frame containing values of components of the Theil index.
-<<<<<<< HEAD
 
 Columns of the data frame represent values of the feature used for
 decomposition. There can be inequality within groups formed by this feature
@@ -54,24 +53,15 @@ overall income inequality.
 Remember that overall Theil index, which is the sum of all values in the data
 frame, is always positive. However, some components of the index can have
 negative contribution to inequality.
-=======
-Every column represents a feature, while every row represents an income
-source. Thus, every value in this data frame represents the contribution of
-income inequality in i-th income source among population members
-possessing j-th feature to total income inequality.
->>>>>>> 16af2c2ab8dcd205fe92340b8cf4cc93dd86d3c7
 }
 \description{
 The function performs two-dimensional decomposition of the
 Theil index according to Giammatteo (2007). That is, the index can be
 decomposed by some feature that members of the studied population possess
 (e.g., sex, education, age) and their income source at the same time.
-<<<<<<< HEAD
 
 The Theil index contains natural logarithm in its formula. This is why
 non-positive values of total income are removed during calculation.
-=======
->>>>>>> 16af2c2ab8dcd205fe92340b8cf4cc93dd86d3c7
 }
 \examples{
 \dontrun{

@@ -159,8 +159,17 @@ scv.2d <- function(data, total, feature = NULL, sources = NULL,
       out[out$source == i, paste0(j, ".B")] <- num
     }
   }
+
+  # If no feature is specified, the function will create two columns: all.W and
+  # all.B, making sure that the loop still functions in this case. The all.B
+  # column, however, will contain zeroes in this situation, so it can be deleted.
+  if (length(unique(data[, feature]))){
+    out <- out[, -3]
+  }
+
+  # Calculation of percentages.
   if (perc == TRUE){
-    out[,-1] <- out[,-1] / sum(out[,-1]) * 100
+    out[, -1] <- out[, -1] / sum(out[, -1]) * 100
   }
   return(out)
 }

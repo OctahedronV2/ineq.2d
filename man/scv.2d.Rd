@@ -38,7 +38,6 @@ every inequality component in overall inequality. Set to FALSE by default.}
 }
 \value{
 Data frame containing values of components of SCV.
-<<<<<<< HEAD
 
 Columns of the data frame represent values of the feature used for
 decomposition. There can be inequality within groups formed by this feature
@@ -55,12 +54,6 @@ overall income inequality.
 Remember that overall SCV, which is the sum of all values in the data
 frame, is always positive. However, some components of the coefficient can
 have negative contribution to inequality.
-=======
-Every column represents a feature, while every row represents an income
-source. Thus, every value in this data frame represents the contribution of
-income inequality in i-th income source among population members
-possessing j-th feature to total income inequality.
->>>>>>> 16af2c2ab8dcd205fe92340b8cf4cc93dd86d3c7
 }
 \description{
 The function performs two-dimensional decomposition of the
