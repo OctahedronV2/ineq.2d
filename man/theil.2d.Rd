@@ -4,7 +4,14 @@
 \alias{theil.2d}
 \title{Function performing two-dimensional decomposition of the Theil index.}
 \usage{
-theil.2d(data, total, feature = NULL, sources = NULL, weights = NULL)
+theil.2d(
+  data,
+  total,
+  feature = NULL,
+  sources = NULL,
+  weights = NULL,
+  perc = FALSE
+)
 }
 \arguments{
 \item{data}{Data frame containing income data.}
@@ -23,17 +30,22 @@ income is not decomposed by income source.}
 
 \item{weights}{String specifying the name of the column containing population
 weights.}
+
+\item{perc}{If set to TRUE, then the function returns percentage shares of
+every inequality component in overall inequality. Set to FALSE by default.}
 }
 \value{
 Data frame containing values of components of the Theil index.
 Every column represents a feature, while every row represents an income
 source. Thus, every value in this data frame represents the contribution of
 income inequality in i-th income source among population members
-possessing j-th feature to total income inequality. These values are
-calculated using the formulas suggested in Giammatteo (2007).
+possessing j-th feature to total income inequality.
 }
 \description{
-Function performing two-dimensional decomposition of the Theil index.
+The function performs two-dimensional decomposition of the
+Theil index according to Giammatteo (2007). That is, the index can be
+decomposed by some feature that members of the studied population possess
+(e.g., sex, education, age) and their income source at the same time.
 }
 \examples{
 \dontrun{
