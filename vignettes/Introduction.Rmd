@@ -1,0 +1,158 @@
+---
+title: "Introduction to ineq.2d package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to ineq.2d package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ineq.2d)
+```
+
+This is the introduction to the ineq.2d package.
+
+The package contains functions performing two-dimensional decomposition of the 
+Theil index (see Giammatteo, 2007) and the squared coefficient of variation 
+(see Garcia-Penalosa & Orgiazzi, 2013). Both measures can be decomposed by some 
+feature that members of the studied population possess (e.g., sex, education, 
+age) and their income source at the same time. 
+
+Researchers and students interested in studying income or wealth inequality can 
+benefit from fast and simple inequality decomposition offered by this package. 
+
+
+First, let us load the test dataset to the environment and examine its content.
+```{r}
+data(us16)
+str(us16)
+```
+
+This dataset contains several income variables: hitotal, hilabour, hicapital,
+and hitransfer. This is a household-level data. This is why every variable name
+begins with "h". hitotal represents total income of a given household. The other
+three income variables are components of hitotal (i.e., their sum equals hitotal). 
+
+Additionally, this dataset contains three variables representing some feature
+of the household head: sex, educ, and age. 
+
+Finally, the dataset contains population weights for every household: hpopwgt.
+
+Let us now try decomposing both indexes only by sex. This is an example of
+one-dimensional decomposition.
+
+We decompose the Theil index first:
+```{r}
+theil.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
+```
+
+Remember that the Theil index contains natural logarithm in its formula. 
+This is why non-positive values are automatically removed during calculation.
+
+Decomposition of the squared coefficient of variation (SCV) is done similarly:
+```{r}
+scv.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
+```
+
+Every column of the output data frame represents a value of the feature used for
+decomposition (here, it is sex). There can be inequality within groups formed by 
+this feature and between them - there are twice as much columns as values of the 
+given feature. Whether a column contains a value of within or between-group
+inequality is indicated by ".W" and ".B" suffixes respectively.
+
+Now, we can try two-dimensional decomposition. That is, we decompose both 
+inequality measures by sex and by income source at the same time.
+
+First, we decompose the Theil index:
+```{r}
+theil.2d(us16, "hitotal", "sex", c("hilabour", "hicapital", 
+                                   "hitransfer"), "hpopwgt")
+```
+
+Then, we decompose SCV:
+```{r}
+scv.2d(us16, "hitotal", "sex", c("hilabour", "hicapital", 
+                                 "hitransfer"), "hpopwgt")
+```
+
+Now we have both rows and columns in this data frame.
+Every row of the data frame represents an income source. Thus, in case of two-
+dimensional decomposition, every value in this data frame is the contribution of
+inequality in income earned from i-th source by members of j-th population 
+cohort to overall income inequality.
+
+Remember that overall Theil index, which is the sum of all values in the data
+frame, is always positive. However, some components of the index can have
+negative contribution to inequality.
+
+If you want the functions to return percentage shares of every inequality
+component in overall inequality rather than indexes, then set the option "perc"
+to "TRUE".
+```{r}
+theil.2d(us16, "hitotal", "sex", c("hilabour", "hicapital", 
+                                   "hitransfer"), "hpopwgt", perc = TRUE)
+
+scv.2d(us16, "hitotal", "sex", c("hilabour", "hicapital", 
+                                 "hitransfer"), "hpopwgt", perc = TRUE)
+```
+
+Overall inequality measures can be obtained in two ways. The first one is to sum 
+the values in the output data frame:
+```{r}
+theil1 <- theil.2d(us16, "hitotal", "sex", c("hilabour", "hicapital", 
+                                             "hitransfer"), "hpopwgt")
+sum(theil1[,-1])
+
+scv1 <- scv.2d(us16, "hitotal", "sex", c("hilabour", "hicapital", 
+                                         "hitransfer"), "hpopwgt")
+sum(scv1[,-1])
+```
+
+The second way is to avoid specifying the feature and income sources:
+```{r}
+theil.2d(us16, "hitotal", weights = "hpopwgt")
+
+scv.2d(us16, "hitotal", weights = "hpopwgt")
+```
+
+Decomposition by education level is done the same way as demonstrated above. 
+You only need to specify "educ" instead of "sex" in function inputs.
+
+Decomposition by age represents a more complicated example. Unlike sex and educ, 
+which assume two and three values respectively, age can assume multiple values 
+because it is measured in years. To decompose the indexes by age, one needs to 
+add column indicating that a household is a member of some age cohort. This can
+be done as follows:
+```{r}
+us16$cohort <- 0
+us16[us16$age < 25, "cohort"] <- "t24"
+us16[us16$age >= 25 & us16$age < 50, "cohort"] <- "f25t49"
+us16[us16$age >= 50 & us16$age < 75, "cohort"] <- "f50t74"
+us16[us16$age >= 75, "cohort"] <- "f75"
+```
+
+After this variable has been created, we can decompose the indexes by the age
+cohorts and income sources:
+```{r}
+theil.2d(us16, "hitotal", "cohort", c("hilabour", "hicapital", 
+                                      "hitransfer"), "hpopwgt")
+
+scv.2d(us16, "hitotal", "cohort", c("hilabour", "hicapital", 
+                                    "hitransfer"), "hpopwgt")
+```
+
+References:
+
+Garcia-Penalosa, C., & Orgiazzi, E. (2013). Factor Components of Inequality:
+A Cross-Country Study. Review of Income and Wealth, 59(4), 689-727.
+
+Giammatteo, M. (2007). The Bidimensional Decomposition of Inequality:
+A nested Theil Approach. LIS Working papers, Article 466, 1-30.

@@ -1,6 +1,7 @@
 #' Function performing two-dimensional decomposition of the Theil index.
 #'
-#' @param data Data frame containing income data.
+#' @param data Data frame containing income data. Must contain at least one
+#' column with numeric values.
 #' @param total String specifying the name of the column containing data on
 #' total income.
 #' @param feature String specifying the name of the column containing
@@ -8,19 +9,38 @@
 #' blank, total income is not decomposed by feature.
 #' @param sources Vector containing strings specifying the names of the columns
 #' with data on income sources, the sum of which must be equal to total income.
-#' The user can specify the same value as in "total." If left blank, total
+#' If left blank, or the same value as in "total" is specified, then total
 #' income is not decomposed by income source.
 #' @param weights String specifying the name of the column containing population
 #' weights.
+#' @param perc If set to TRUE, then the function returns percentage shares of
+#' every inequality component in overall inequality. Set to FALSE by default.
 #'
-#' @description
+#' @description The function performs two-dimensional decomposition of the
+#' Theil index according to Giammatteo (2007). That is, the index can be
+#' decomposed by some feature that members of the studied population possess
+#' (e.g., sex, education, age) and their income source at the same time.
+#'
+#' The Theil index contains natural logarithm in its formula. This is why
+#' non-positive values of total income are removed during calculation.
 #'
 #' @return Data frame containing values of components of the Theil index.
-#' Every column represents a feature, while every row represents an income
-#' source. Thus, every value in this data frame represents the contribution of
-#' income inequality in i-th income source among population members
-#' possessing j-th feature to total income inequality. These values are
-#' calculated using the formulas suggested in Giammatteo (2007).
+#'
+#' Columns of the data frame represent values of the feature used for
+#' decomposition. There can be inequality within groups formed by this feature
+#' and between them - there are twice as much columns as values of the given
+#' feature. Whether a column contains a value of within or between-group
+#' inequality is indicated by ".W" and ".B" suffixes respectively.
+#'
+#' Every row of the data frame represents an income source.
+#'
+#' Thus, every value in this data frame is the contribution of inequality in
+#' income earned from i-th source by members of j-th population cohort to
+#' overall income inequality.
+#'
+#' Remember that overall Theil index, which is the sum of all values in the data
+#' frame, is always positive. However, some components of the index can have
+#' negative contribution to inequality.
 #'
 #' @references
 #' Giammatteo, M. (2007). The Bidimensional Decomposition of Inequality:
@@ -44,7 +64,7 @@
 #' "hitransfer"), "hpopwgt")
 #' }
 theil.2d <- function(data, total, feature = NULL, sources = NULL,
-                     weights = NULL){
+                     weights = NULL, perc = FALSE){
 
   # Create population weights if they are not provided.
   if (is.null(weights)) {
@@ -127,6 +147,9 @@ theil.2d <- function(data, total, feature = NULL, sources = NULL,
         (igrMean / ovMean) * log(grMean / ovMean)
       out[out$source == i, paste0(j, ".B")] <- num
     }
+  }
+  if (perc == TRUE){
+    out[,-1] <- out[,-1] / sum(out[,-1]) * 100
   }
   return(out)
 }
