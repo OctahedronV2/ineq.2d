@@ -30,9 +30,9 @@ test_that("The function returns NaN if all incomes are equal.", {
   # Set total incomes of all households to 1.
   # If all members of the studied population earn the same income, SCV must be
   # equal to zero. But, scv.2d calculates "alpha," which is the absolute
-  # contribution of the given income source to overall inequality. It calculation
-  # is impossible for identical incomes because the formula involves division by
-  # variance of income, which is zero in this case.
+  # contribution of the given income source to overall inequality. Its
+  # calculation is impossible for identical incomes because the formula involves
+  # division by variance of income, which is zero in this case.
   us16$hitotal <- 1
 
   # SCV using scv.2d.
@@ -187,7 +187,8 @@ test_that("Sum of the components of SCV decomposed by sex and by income source
 })
 
 test_that("Sum of the components of SCV decomposed by education and by income
-          source is equal to the coefficient calcualted without decomposition.", {
+          source is equal to the coefficient calcualted without
+          decomposition.", {
 
   data("us16")
 
@@ -277,9 +278,9 @@ test_that("The function returns NaN if all incomes are equal and without
   # Set total incomes of all households to 1.
   # If all members of the studied population earn the same income, SCV must be
   # equal to zero. But, scv.2d calculates "alpha," which is the absolute
-  # contribution of the given income source to overall inequality. Its calculation
-  # is impossible for identical incomes because the formula involves division by
-  # variance of income, which is zero in this case.
+  # contribution of the given income source to overall inequality. Its
+  # calculation is impossible for identical incomes because the formula
+  # involves division by variance of income, which is zero in this case.
   us16$hitotal <- 1
 
   # SCV using scv.2d.
@@ -501,8 +502,9 @@ test_that("Sum of the components of SCV decomposed by sex and by income source
 })
 
 test_that("Sum of the components of SCV decomposed by education and by income
-          source is not equal to the coefficient calcualted without decomposition
-          if the sum of income sources is not equal to total income.", {
+          source is not equal to the coefficient calcualted without
+          decomposition if the sum of income sources is not equal to total
+          income.", {
 
   data("us16")
 
@@ -590,9 +592,9 @@ test_that("Sum of the components of SCV decomposed by sex and by income source
 })
 
 test_that("Sum of the components of SCV decomposed by education and by income
-          source is not equal to the coefficient calcualted without decomposition
-          if the sum of income sources is not equal to total income (without
-          population weights).", {
+          source is not equal to the coefficient calcualted without
+          decomposition if the sum of income sources is not equal to total
+          income (without population weights).", {
 
   data("us16")
 
@@ -665,7 +667,9 @@ test_that("Sum of the components of SCV decomposed by sex and by income source
   # Randomly place NA values.
   # Only selected columns are used because scv.2d will remove unused features,
   # which are education and age in this case.
-  columns <- c("hitotal", "sex", "hilabour", "hicapital", "hitransfer", "hpopwgt")
+  columns <- c("hitotal", "sex", "hilabour", "hicapital", "hitransfer",
+               "hpopwgt")
+
   for (i in columns){
     us16[, i][sample(nrow(us16), 5)] <- NA
   }
@@ -885,7 +889,8 @@ test_that("Sum of the components of SCV decomposed by age expressed as
 })
 
 test_that("Sum of the components of SCV decomposed by sex and by income source
-          expressed as percentage share of total income is equal to one hundred.", {
+          expressed as percentage share of total income is equal to
+          one hundred.", {
 
   data("us16")
 
@@ -916,7 +921,8 @@ test_that("Sum of the components of SCV decomposed by education and by income
 })
 
 test_that("Sum of the components of SCV decomposed by age and by income source
-          expressed as percentage share of total income is equal to one hundred.", {
+          expressed as percentage share of total income is equal to
+          one hundred.", {
 
   data("us16")
 

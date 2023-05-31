@@ -104,7 +104,8 @@ theil.2d <- function(data, total, feature = NULL, sources = NULL,
   groups <- unique(data[, feature])
 
   # Create data frame to store the output.
-  out <- data.frame(matrix(ncol = 2 * length(groups) + 1, nrow = length(sources)))
+  out <- data.frame(matrix(ncol = 2 * length(groups) + 1,
+                           nrow = length(sources)))
   colnames(out) <- c("source", paste0(groups, ".W"), paste0(groups, ".B"))
   out$source <- sources
 
@@ -153,7 +154,8 @@ theil.2d <- function(data, total, feature = NULL, sources = NULL,
 
   # If no feature is specified, the function will create two columns: all.W and
   # all.B, making sure that the loop still functions in this case. The all.B
-  # column, however, will contain zeroes in this situation, so it can be deleted.
+  # column, however, will contain zeroes in this situation,
+  # so it can be deleted.
   if (length(unique(data[, feature])) == 1){
     out <- out[, -3]
   }

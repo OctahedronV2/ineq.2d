@@ -1,18 +1,16 @@
 Package: ineq.2d
 Type: Package
-Title: Two-dimensional decomposition of the Theil index and the Squared 
-    Coefficient of Variation
+Title: Two-Dimensional Decomposition of the Theil Index and the Squared 
+     Coefficient of Variation
 Version: 0.1.0
 Author: Ivan Skliarov
 Maintainer: Ivan Skliarov <i.skliarov@student.uw.edu.pl>
 Description: Functions performing two-dimensional decomposition of the Theil 
     index and the squared coefficient of variation. Both indexes can be
     decomposed by some feature that members of the studied population possess 
-    (e.g., sex, education, age) and their income sources at the same time. 
-    Decomposition of the Theil index is performed according to Giammatteo (2007) 
-    <www.lisdatacenter.org/wps/liswps/466.pdf>.
-    Decomposition of the squared coefficient of variation is performed according to
-    Garcia-Penalosa & Orgiazzi (2013) <doi.org/10.1111/roiw.12054>.
+    (e.g., sex, education, age) and their income sources at the same time.
+URL: https://github.com/sklivan/ineq.2d
+BugReports: https://github.com/sklivan/ineq.2d/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

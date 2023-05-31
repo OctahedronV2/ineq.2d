@@ -18,10 +18,10 @@
 #' every inequality component in overall inequality. Set to FALSE by default.
 #'
 #' @description The function performs two-dimensional decomposition of the
-#' squared coefficient of variation according to Garcia-Penalosa & Orgiazzi (2013).
-#' That is, the coefficient can be decomposed by some feature that members of
-#' the studied population possess (e.g., sex, education, age) and their income
-#' source at the same time.
+#' squared coefficient of variation according to Garcia-Penalosa & Orgiazzi
+#' (2013). That is, the coefficient can be decomposed by some feature that
+#' members of the studied population possess (e.g., sex, education, age) and
+#' their income source at the same time.
 #'
 #' @return Data frame containing values of components of SCV.
 #'
@@ -43,10 +43,10 @@
 #'
 #' If all members of the studied population earn the same income, SCV normally
 #' must be equal to zero. But, scv.2d calculates "alpha," which is the absolute
-#' contribution of the given income source to overall inequality. Its calculation
-#' is impossible for identical incomes because the formula involves division by
-#' variance of income, which is zero in this case. Thus, the function will
-#' return the NaN value.
+#' contribution of the given income source to overall inequality. Its
+#' calculation is impossible for identical incomes because the formula involves
+#' division by variance of income, which is zero in this case. Thus, the
+#' function will return the NaN value.
 #'
 #' @references
 #' Garcia-Penalosa, C., & Orgiazzi, E. (2013). Factor Components of Inequality:
@@ -107,7 +107,8 @@ scv.2d <- function(data, total, feature = NULL, sources = NULL,
   groups <- unique(data[, feature])
 
   # Create data frame to store the output.
-  out <- data.frame(matrix(ncol = 2 * length(groups) + 1, nrow = length(sources)))
+  out <- data.frame(matrix(ncol = 2 * length(groups) + 1,
+                           nrow = length(sources)))
   colnames(out) <- c("source", paste0(groups, ".W"), paste0(groups, ".B"))
   out$source <- sources
 
@@ -126,7 +127,8 @@ scv.2d <- function(data, total, feature = NULL, sources = NULL,
     # SCV of total income.
     tSCV <- tVar / (2 * tMean^2)
 
-    # Weighted mean and average of the total population's income from i-th source.
+    # Weighted mean and average of the total population's income
+    # from i-th source.
     iMean <- weighted.mean(data[, i], ovWgt)
     iVar <- (1 / sum(ovWgt)) * sum(ovWgt * (data[, i] - iMean)^2)
 
@@ -134,7 +136,7 @@ scv.2d <- function(data, total, feature = NULL, sources = NULL,
     iSCV <- iVar / (2 * iMean^2)
 
     # Correlation between the income source and total income.
-    corrMat <- cov.wt(data[, c(i, total)], ovWgt, cor = T)
+    corrMat <- cov.wt(data[, c(i, total)], ovWgt, cor = TRUE)
     corrL <- corrMat$cor[2]
 
     # Absolute contribution of the given income source to overall inequality.
@@ -171,7 +173,8 @@ scv.2d <- function(data, total, feature = NULL, sources = NULL,
 
   # If no feature is specified, the function will create two columns: all.W and
   # all.B, making sure that the loop still functions in this case. The all.B
-  # column, however, will contain zeroes in this situation, so it can be deleted.
+  # column, however, will contain zeroes in this situation,
+  # so it can be deleted.
   if (length(unique(data[, feature])) == 1){
     out <- out[, -3]
   }

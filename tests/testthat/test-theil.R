@@ -150,7 +150,8 @@ test_that("Sum of the components of the Theil index decomposed by age is
 })
 
 test_that("Sum of the components of the Theil index decomposed by sex and by
-          income source is equal to the index calcualted without decomposition.", {
+          income source is equal to the index calcualted without
+          decomposition.", {
 
   data("us16")
 
@@ -203,7 +204,8 @@ test_that("Sum of the components of the Theil index decomposed by education and
 })
 
 test_that("Sum of the components of the Theil index decomposed by age and by
-          income source is equal to the index calcualted without decomposition.", {
+          income source is equal to the index calcualted without
+          decomposition.", {
 
   data("us16")
 
@@ -655,7 +657,9 @@ test_that("Sum of the components of the Theil index decomposed by sex and by
   # Randomly place NA values.
   # Only selected columns are used because theil.2d will remove unused features,
   # which are education and age in this case.
-  columns <- c("hitotal", "sex", "hilabour", "hicapital", "hitransfer", "hpopwgt")
+  columns <- c("hitotal", "sex", "hilabour", "hicapital", "hitransfer",
+               "hpopwgt")
+
   for (i in columns){
     us16[, i][sample(nrow(us16), 5)] <- NA
   }
@@ -685,15 +689,17 @@ test_that("Sum of the components of the Theil index decomposed by sex and by
 })
 
 test_that("Sum of the components of the Theil index decomposed by education and
-          by income source is equal to the index calcualted without decomposition
-          if NA values are present in the dataset.", {
+          by income source is equal to the index calcualted without
+          decomposition if NA values are present in the dataset.", {
 
   data("us16")
 
   # Randomly place NA values.
   # Only selected columns are used because theil.2d will remove unused features,
   # which are sex and age in this case.
-  columns <- c("hitotal", "educ", "hilabour", "hicapital", "hitransfer", "hpopwgt")
+  columns <- c("hitotal", "educ", "hilabour", "hicapital", "hitransfer",
+               "hpopwgt")
+
   for (i in columns){
     us16[, i][sample(nrow(us16), 5)] <- NA
   }
@@ -770,7 +776,8 @@ test_that("Sum of the components of the Theil index decomposed by age and by
 })
 
 test_that("Sum of the components of the Theil index decomposed only by
-          income source is equal to the index calcualted without decomposition.", {
+          income source is equal to the index calcualted without
+          decomposition.", {
 
   data("us16")
 
@@ -837,7 +844,8 @@ test_that("Sum of the components of the Theil index decomposed by sex expressed
 })
 
 test_that("Sum of the components of the Theil index decomposed by education
-          expressed as percentage share of total income is equal to one hundred.", {
+          expressed as percentage share of total income is equal to
+          one hundred.", {
 
   data("us16")
 
@@ -886,8 +894,8 @@ test_that("Sum of the components of the Theil index decomposed by sex and by
 })
 
 test_that("Sum of the components of the Theil index decomposed by education and
-          by income source expressed as percentage share of total income is equal
-          to one hundred.", {
+          by income source expressed as percentage share of total income is
+          equal to one hundred.", {
 
   data("us16")
 

@@ -57,17 +57,17 @@ have negative contribution to inequality.
 
 If all members of the studied population earn the same income, SCV normally
 must be equal to zero. But, scv.2d calculates "alpha," which is the absolute
-contribution of the given income source to overall inequality. Its calculation
-is impossible for identical incomes because the formula involves division by
-variance of income, which is zero in this case. Thus, the function will
-return the NaN value.
+contribution of the given income source to overall inequality. Its
+calculation is impossible for identical incomes because the formula involves
+division by variance of income, which is zero in this case. Thus, the
+function will return the NaN value.
 }
 \description{
 The function performs two-dimensional decomposition of the
-squared coefficient of variation according to Garcia-Penalosa & Orgiazzi (2013).
-That is, the coefficient can be decomposed by some feature that members of
-the studied population possess (e.g., sex, education, age) and their income
-source at the same time.
+squared coefficient of variation according to Garcia-Penalosa & Orgiazzi
+(2013). That is, the coefficient can be decomposed by some feature that
+members of the studied population possess (e.g., sex, education, age) and
+their income source at the same time.
 }
 \examples{
 \dontrun{
