@@ -11,7 +11,7 @@ Description: Functions performing two-dimensional decomposition of the Theil
     (e.g., sex, education, age) and their income sources at the same time.
 URL: https://github.com/sklivan/ineq.2d
 BugReports: https://github.com/sklivan/ineq.2d/issues
-License: GPL-3
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
