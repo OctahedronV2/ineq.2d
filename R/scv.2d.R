@@ -41,6 +41,13 @@
 #' frame, is always positive. However, some components of the coefficient can
 #' have negative contribution to inequality.
 #'
+#' If all members of the studied population earn the same income, SCV normally
+#' must be equal to zero. But, scv.2d calculates "alpha," which is the absolute
+#' contribution of the given income source to overall inequality. Its calculation
+#' is impossible for identical incomes because the formula involves division by
+#' variance of income, which is zero in this case. Thus, the function will
+#' return the NaN value.
+#'
 #' @references
 #' Garcia-Penalosa, C., & Orgiazzi, E. (2013). Factor Components of Inequality:
 #' A Cross-Country Study. Review of Income and Wealth, 59(4), 689-727.
