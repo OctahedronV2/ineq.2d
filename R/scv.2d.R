@@ -1,5 +1,5 @@
 #' Function performing two-dimensional decomposition of the squared
-#' coefficient of variation (SCV).
+#' coefficient of variation (SCV)
 #'
 #' @param data Data frame containing income data. Must contain at least one
 #' column with numeric values.
@@ -54,18 +54,20 @@
 #'
 #' @export
 #'
+#' @importFrom stats complete.cases weighted.mean cov.wt
+#'
 #' @examples
 #' \dontrun{
-#' Load the test data set.
+#' # Load the test data set.
 #' data("us16")
 #'
-#' No decomposition, just SCV of total income.
+#' # No decomposition, just SCV of total income.
 #' result <- scv.2d(us16, "hitotal", weights = "hpopwgt")
 #'
-#' Decomposition of income inequality by gender.
+#' # Decomposition of income inequality by gender.
 #' result <- scv.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
 #'
-#' Decomposition of income inequality by gender and income source.
+#' # Decomposition of income inequality by gender and income source.
 #' result <- scv.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 #' "hitransfer"), "hpopwgt")
 #' }

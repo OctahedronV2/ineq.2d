@@ -1,7 +1,7 @@
 Package: ineq.2d
 Type: Package
 Title: Two-dimensional decomposition of the Theil index and the Squared 
-    Coefficient of Variation.
+    Coefficient of Variation
 Version: 0.1.0
 Author: Ivan Skliarov
 Maintainer: Ivan Skliarov <i.skliarov@student.uw.edu.pl>

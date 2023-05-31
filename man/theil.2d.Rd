@@ -2,7 +2,7 @@
 % Please edit documentation in R/theil.2d.R
 \name{theil.2d}
 \alias{theil.2d}
-\title{Function performing two-dimensional decomposition of the Theil index.}
+\title{Function performing two-dimensional decomposition of the Theil index}
 \usage{
 theil.2d(
   data,
@@ -65,16 +65,16 @@ non-positive values of total income are removed during calculation.
 }
 \examples{
 \dontrun{
-Load the test data set.
+# Load the test data set.
 data("us16")
 
-No decomposition, just Theil index of total income.
+# No decomposition, just Theil index of total income.
 result <- theil.2d(us16, "hitotal", weights = "hpopwgt")
 
-Decomposition of income inequality by gender.
+# Decomposition of income inequality by gender.
 result <- theil.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
 
-Decomposition of income inequality by gender and income source.
+# Decomposition of income inequality by gender and income source.
 result <- theil.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 "hitransfer"), "hpopwgt")
 }

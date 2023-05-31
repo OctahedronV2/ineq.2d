@@ -3,7 +3,7 @@
 \docType{data}
 \name{us16}
 \alias{us16}
-\title{Test dataset for the ineq.2d package.}
+\title{Test dataset for the ineq.2d package}
 \format{
 A data frame with 1000 rows and 8 variables:
 
@@ -27,12 +27,18 @@ https://www.lisdatacenter.org/resources/self-teaching/
 us16
 }
 \description{
-Contains income data on 1000 households. This includes three income sources
-and value for total income. Additionally, contains several features of every
-household head: sex, education, and age.
+This data set is a combination of household and personal-level data sets
+available as sample files on the Luxembourg Income Study website. The data
+sets were combined to assign personal characteristics of household heads to
+households.
+}
+\details{
+Thus, the combined data set contains income data on 1000 households. This
+includes three income sources and value for total income. Additionally,
+contains several features of every household head: sex, education, and age.
 }
 \examples{
-To load the dataset to the environment, use the following code:
+# To load the dataset to the environment, use the following code:
 data(us16)
 }
 \keyword{datasets}

@@ -1,8 +1,13 @@
-#' Test dataset for the ineq.2d package.
+#' Test dataset for the ineq.2d package
 #'
-#' Contains income data on 1000 households. This includes three income sources
-#' and value for total income. Additionally, contains several features of every
-#' household head: sex, education, and age.
+#' This data set is a combination of household and personal-level data sets
+#' available as sample files on the Luxembourg Income Study website. The data
+#' sets were combined to assign personal characteristics of household heads to
+#' households.
+#'
+#' Thus, the combined data set contains income data on 1000 households. This
+#' includes three income sources and value for total income. Additionally,
+#' contains several features of every household head: sex, education, and age.
 #'
 #' @format A data frame with 1000 rows and 8 variables:
 #'
@@ -22,6 +27,6 @@
 #' }
 #'
 #' @examples
-#' To load the dataset to the environment, use the following code:
+#' # To load the dataset to the environment, use the following code:
 #' data(us16)
 "us16"
