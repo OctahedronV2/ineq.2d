@@ -51,7 +51,6 @@
 #' @importFrom stats complete.cases weighted.mean
 #'
 #' @examples
-#' \dontrun{
 #' # Load the test data set.
 #' data("us16")
 #'
@@ -64,7 +63,6 @@
 #' # Decomposition of income inequality by gender and income source.
 #' result <- theil.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 #' "hitransfer"), "hpopwgt")
-#' }
 theil.2d <- function(data, total, feature = NULL, sources = NULL,
                      weights = NULL, perc = FALSE){
 

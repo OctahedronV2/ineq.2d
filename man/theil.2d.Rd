@@ -64,7 +64,6 @@ The Theil index contains natural logarithm in its formula. This is why
 non-positive values of total income are removed during calculation.
 }
 \examples{
-\dontrun{
 # Load the test data set.
 data("us16")
 
@@ -77,7 +76,6 @@ result <- theil.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
 # Decomposition of income inequality by gender and income source.
 result <- theil.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 "hitransfer"), "hpopwgt")
-}
 }
 \references{
 Giammatteo, M. (2007). The Bidimensional Decomposition of Inequality:

@@ -57,7 +57,6 @@
 #' @importFrom stats complete.cases weighted.mean cov.wt
 #'
 #' @examples
-#' \dontrun{
 #' # Load the test data set.
 #' data("us16")
 #'
@@ -70,7 +69,6 @@
 #' # Decomposition of income inequality by gender and income source.
 #' result <- scv.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 #' "hitransfer"), "hpopwgt")
-#' }
 scv.2d <- function(data, total, feature = NULL, sources = NULL,
                    weights = NULL, perc = FALSE){
 

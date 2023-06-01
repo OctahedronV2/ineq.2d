@@ -70,7 +70,6 @@ members of the studied population possess (e.g., sex, education, age) and
 their income source at the same time.
 }
 \examples{
-\dontrun{
 # Load the test data set.
 data("us16")
 
@@ -83,7 +82,6 @@ result <- scv.2d(us16, "hitotal", "sex", "hitotal", "hpopwgt")
 # Decomposition of income inequality by gender and income source.
 result <- scv.2d(us16, "hitotal", "sex", c("hilabour", "hicapital",
 "hitransfer"), "hpopwgt")
-}
 }
 \references{
 Garcia-Penalosa, C., & Orgiazzi, E. (2013). Factor Components of Inequality:
