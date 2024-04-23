@@ -65,83 +65,88 @@
 #' "hitransfer"), "hpopwgt")
 theil.2d <- function(data, total, feature = NULL, sources = NULL,
                      weights = NULL, perc = FALSE){
-
+  
   # Create population weights if they are not provided.
   if (is.null(weights)) {
     weights <- paste0(total, ".weights")
     data[weights] <- rep(1, nrow(data))
   }
-
+  
   # Create income source if none is provided.
   if (is.null(sources)){
     sources <- total
   }
-
+  
   # Create feature if none is provided.
   if (is.null(feature)){
     feature <- paste0(total, ".all")
     data[feature] <- rep("all", nrow(data))
   }
-
+  
+  # Convert tibble to data.frame if necessary.
+  if (inherits(data, "tbl_df")) {
+    data <- as.data.frame(data)
+  }
+  
   # Remove unnecessary data.
   data <- data[, c(feature, total, sources, weights)]
-
+  
   # Remove rows that have missing values.
   data <- data[complete.cases(data),]
-
+  
   # Stop executing the function if at least one weight is either
   # zero or negative.
   if (!all(data[, weights] > 0)) {
     stop("At least one weight is nonpositive!", call. = FALSE)
   }
-
+  
   # Remove all values of total income that are less than or equal to zero.
   data <- data[data[, total] > 0,]
-
+  
   # Identify unique population groups.
   groups <- unique(data[, feature])
-
+  
   # Create data frame to store the output.
   out <- data.frame(matrix(ncol = 2 * length(groups) + 1,
                            nrow = length(sources)))
   colnames(out) <- c("source", paste0(groups, ".W"), paste0(groups, ".B"))
   out$source <- sources
-
+  
   # Normalize population weights.
   ovWgt <- data[, weights]
   ovWgt <- ovWgt / sum(ovWgt)
-
+  
   # Weighted average income of the entire population.
   ovMean <- weighted.mean(data[, total], ovWgt)
-
+  
   # Calculation of Theil's index components.
   for (i in sources){
     for (j in groups){
-
+      
       # Create a vector of incomes of j-th population group.
       pgr <- data[data[, feature] == j,]
-
+      
       # Normalize j-th group's population weights.
       gWgt <- pgr[, weights]
       gWgt <- gWgt / sum(gWgt)
-
+      
       # Weighted average income of j-th population group.
       grMean <- weighted.mean(pgr[, total], gWgt)
-
+      
       # Ratios necessary to calculate the Theil index
       # for i-th income source of j-th population group.
       ratio1 <- pgr[, i] / grMean
       ratio2 <- pgr[, total] / grMean
-
+      
       # Within-group component of the Theil index for i-th income source
       # of j-th population group.
       num <- (sum(pgr[, weights]) / sum(data[, weights])) *
         (grMean / ovMean) * sum(gWgt * ratio1 * log(ratio2))
       out[out$source == i, paste0(j, ".W")] <- num
-
+      
       # Weighted average income from i-th source of j-th population group.
       igrMean <- weighted.mean(pgr[, i], gWgt)
-
+      
       # Between-group component of the Theil index for i-th income source
       # of j-th population group.
       num <- (sum(pgr[, weights]) / sum(data[, weights])) *
@@ -149,7 +154,7 @@ theil.2d <- function(data, total, feature = NULL, sources = NULL,
       out[out$source == i, paste0(j, ".B")] <- num
     }
   }
-
+  
   # If no feature is specified, the function will create two columns: all.W and
   # all.B, making sure that the loop still functions in this case. The all.B
   # column, however, will contain zeroes in this situation,
@@ -157,7 +162,7 @@ theil.2d <- function(data, total, feature = NULL, sources = NULL,
   if (length(unique(data[, feature])) == 1){
     out <- out[, -3]
   }
-
+  
   # Calculation of percentages.
   if (perc == TRUE){
     out[,-1] <- out[,-1] / sum(out[,-1]) * 100
